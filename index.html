@@ -11,17 +11,18 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
 
-  /* FOTO CORRIGIDA */
+  /* FOTO SEM CORTE */
   background: url('foto.jpg') no-repeat center center;
-  background-size: cover;
+  background-size: contain;
+  background-color: black;
 }
 
-/* camada escura leve */
+/* overlay escuro */
 .overlay {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.5);
 }
 
 /* carta */
@@ -93,16 +94,17 @@ button {
 </div>
 
 <!-- MÚSICA -->
-<audio autoplay loop>
+<audio id="musica" loop>
   <source src="musica.mp3" type="audio/mp3">
 </audio>
 
 <script>
 function surpresa() {
+  document.getElementById("musica").play();
   alert("Você é a melhor coisa da minha vida ❤️");
 }
 
-/* criar corações caindo */
+/* corações caindo */
 setInterval(() => {
   let heart = document.createElement("div");
   heart.className = "heart";
