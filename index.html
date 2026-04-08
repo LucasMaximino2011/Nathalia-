@@ -10,19 +10,29 @@ body {
   overflow: hidden;
   font-family: Arial, sans-serif;
   text-align: center;
-
-  /* FOTO SEM CORTE */
-  background: url('foto.jpg') no-repeat center center;
-  background-size: contain;
-  background-color: black;
 }
 
-/* overlay escuro */
-.overlay {
+/* FUNDO COM BLUR (PROFISSIONAL) */
+body::before {
+  content: "";
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: url('foto.jpg') no-repeat center center;
+  background-size: cover;
+  filter: blur(20px);
+  z-index: -2;
+}
+
+/* FOTO PRINCIPAL (SEM CORTE) */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url('foto.jpg') no-repeat center center;
+  background-size: contain;
+  z-index: -1;
 }
 
 /* carta */
@@ -81,8 +91,6 @@ button {
 
 <body>
 
-<div class="overlay"></div>
-
 <div class="carta">
   <h1>Nathalia ❤️</h1>
   <p>Eu sei que não sou perfeito...</p>
@@ -100,11 +108,12 @@ button {
 
 <script>
 function surpresa() {
-  document.getElementById("musica").play();
+  let audio = document.getElementById("musica");
+  audio.play().catch(() => {});
   alert("Você é a melhor coisa da minha vida ❤️");
 }
 
-/* corações caindo */
+/* corações */
 setInterval(() => {
   let heart = document.createElement("div");
   heart.className = "heart";
