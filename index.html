@@ -1,27 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-  <title>Pra você ❤️</title>
-  <style>
-    body {
-      background-color: #ffdde1;
-      text-align: center;
-      font-family: Arial;
-      margin-top: 100px;
-    }
-    h1 {
-      color: #ff4d6d;
-    }
-    p {
-      font-size: 20px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Pra você ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial;
+  text-align: center;
+  background: url('foto.jpg') no-repeat center center/cover;
+}
+
+/* Fundo escuro leve */
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+}
+
+/* Carta */
+.carta {
+  position: absolute;
+  top: -300px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  animation: cair 2s ease-out forwards;
+  z-index: 2;
+}
+
+@keyframes cair {
+  to {
+    top: 150px;
+  }
+}
+
+h1 {
+  color: #ff4d6d;
+}
+
+/* Botão */
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Corações */
+.heart {
+  position: absolute;
+  color: red;
+  animation: fall linear infinite;
+  z-index: 1;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+</style>
 </head>
+
 <body>
 
-<h1>Nathalia ❤️</h1>
-<p>Eu só queria te lembrar que você é a melhor coisa que já me aconteceu.</p>
-<p>Eu te amo muito 🥺💖</p>
+<div class="overlay"></div>
+
+<!-- Música -->
+<audio autoplay loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div class="carta">
+  <h1>Nathalia ❤️</h1>
+  <p>Eu sei que não sou perfeito…</p>
+  <p>Sou grosso, meio chato às vezes,</p>
+  <p>mas eu te amo, bb 💖</p>
+  <p>Nunca esqueça disso.</p>
+
+  <button onclick="surpresa()">Clique aqui 😏</button>
+</div>
+
+<script>
+// Botão surpresa
+function surpresa() {
+  alert("Você é tudo pra mim ❤️");
+}
+
+// Corações
+function criarCoracao() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+  heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}
+
+setInterval(criarCoracao, 300);
+</script>
 
 </body>
 </html>
