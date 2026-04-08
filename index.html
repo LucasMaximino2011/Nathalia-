@@ -8,12 +8,15 @@
 body {
   margin: 0;
   overflow: hidden;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   text-align: center;
-  background: url('foto.jpg') no-repeat center center/cover;
+
+  /* FOTO CORRIGIDA */
+  background: url('foto.jpg') no-repeat center center;
+  background-size: cover;
 }
 
-/* Fundo escuro leve */
+/* camada escura leve */
 .overlay {
   position: fixed;
   width: 100%;
@@ -21,24 +24,26 @@ body {
   background: rgba(0,0,0,0.4);
 }
 
-/* Carta */
+/* carta */
 .carta {
   position: absolute;
-  top: -300px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: 300px;
   background: white;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  animation: cair 2s ease-out forwards;
-  z-index: 2;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  animation: cair 1s ease;
 }
 
 @keyframes cair {
+  from {
+    transform: translate(-50%, -200%);
+  }
   to {
-    top: 150px;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -46,34 +51,28 @@ h1 {
   color: #ff4d6d;
 }
 
-/* Botão */
 button {
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 10px 20px;
   border: none;
   background: #ff4d6d;
   color: white;
-  font-size: 16px;
   border-radius: 10px;
   cursor: pointer;
 }
 
-/* Corações */
+/* corações */
 .heart {
-  position: absolute;
+  position: fixed;
+  top: -10px;
   color: red;
+  font-size: 20px;
   animation: fall linear infinite;
-  z-index: 1;
 }
 
 @keyframes fall {
-  0% {
-    transform: translateY(-10px);
-    opacity: 1;
-  }
-  100% {
+  to {
     transform: translateY(100vh);
-    opacity: 0;
   }
 }
 </style>
@@ -83,45 +82,39 @@ button {
 
 <div class="overlay"></div>
 
-<!-- Música -->
-<audio autoplay loop>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
-
 <div class="carta">
   <h1>Nathalia ❤️</h1>
-  <p>Eu sei que não sou perfeito…</p>
+  <p>Eu sei que não sou perfeito...</p>
   <p>Sou grosso, meio chato às vezes,</p>
   <p>mas eu te amo, bb 💖</p>
   <p>Nunca esqueça disso.</p>
 
-  <button onclick="surpresa()">Clique aqui 😏</button>
+  <button onclick="surpresa()">Clique aqui 😉</button>
 </div>
 
+<!-- MÚSICA -->
+<audio autoplay loop>
+  <source src="musica.mp3" type="audio/mp3">
+</audio>
+
 <script>
-// Botão surpresa
 function surpresa() {
-  alert("Você é tudo pra mim ❤️");
+  alert("Você é a melhor coisa da minha vida ❤️");
 }
 
-// Corações
-function criarCoracao() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
+/* criar corações caindo */
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
   heart.innerHTML = "❤️";
-
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
   heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-
   document.body.appendChild(heart);
 
   setTimeout(() => {
     heart.remove();
   }, 5000);
-}
-
-setInterval(criarCoracao, 300);
+}, 300);
 </script>
 
 </body>
